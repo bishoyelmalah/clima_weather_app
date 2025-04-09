@@ -10,7 +10,7 @@ class Location {
   late double latitude;
   late double longitude;
 
-  Future<void> getCurrentLocation() async {
+  Future<void> getLocationData() async {
     var status = await Permission.location.request();
 
     if (status.isGranted) {
