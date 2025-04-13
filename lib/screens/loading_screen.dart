@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../services/networking.dart';
 import '../services/location.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'main_screen.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -31,15 +32,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
     weatherData = await data.getWeatherData();
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return LocationScreen(
-        locationWeather: weatherData,
-      );
+      // return LocationScreen(
+      // locationWeather: weatherData,
+      // );
+      return MainScreen();
     }));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF1D1E33),
       body: Center(
         child: SpinKitDoubleBounce(
           color: Colors.white,
