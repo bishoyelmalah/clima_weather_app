@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import '../utilities/constants.dart';
+import 'city_screen.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key, required this.locationWeather});
@@ -56,14 +58,21 @@ class _LocationScreenState extends State<LocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                    },
                     child: Icon(
                       Icons.near_me,
                       size: 50.0,
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return CityScreen();
+                      }));
+                    },
                     child: Icon(
                       Icons.location_city,
                       size: 50.0,
@@ -73,15 +82,37 @@ class _LocationScreenState extends State<LocationScreen> {
               ),
               Padding(
                 padding: EdgeInsets.only(left: 15.0),
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      tempreture.toInt().toString(),
-                      style: kTempTextStyle,
+                child: Column(children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        tempreture.toInt().toString(),
+                        style: kTempTextStyle,
+                      ),
+                      Image(
+                        image: NetworkImage("https:$iconLink"),
+                        fit: BoxFit.contain,
+                        height: 120,
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Row(
+                      children: [
+                        Text(
+                          cityName,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        Text(
+                          ", $region",
+                          style: TextStyle(fontSize: 20),
+                        )
+                      ],
                     ),
-                    Image(image: NetworkImage("https:$iconLink"))
-                  ],
-                ),
+                  )
+                ]),
               ),
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
